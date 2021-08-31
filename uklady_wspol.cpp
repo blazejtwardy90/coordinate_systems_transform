@@ -2,7 +2,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 
-/*Program do transfomracji miÍdzu uk≥adami wspÛ≥rzÍdnych*/
+/*Program do transfomracji miÔøΩdzu ukÔøΩadami wspÔøΩrzÔøΩdnych*/
 
 /* Prototypy funkcji */
 double obrot(int n, double k, double r[]);
@@ -13,8 +13,7 @@ double hour2rad(double r[]);
 double rad2st(double k, double r[]);
 double rad2hour(double k, double r[]);
 
-
-/* Funkcja g≥Ûwna */
+/* Funkcja gÔøΩÔøΩwna */
 
 int main(void)
 {
@@ -26,9 +25,9 @@ int main(void)
 	E[2] = 21.448;
 	e = st2rad(E);
 
-	/* WspÛ≥rzÍdne rÛwnikowo rÛwnonocne dla gal */
+	/* WspÔøΩrzÔøΩdne rÔøΩwnikowo rÔøΩwnonocne dla gal */
 
-		/* Rektascencja */
+	/* Rektascencja */
 	AG[0] = 12;
 	AG[1] = 51;
 	AG[2] = 26.27549;
@@ -45,51 +44,51 @@ int main(void)
 	/* Theta */
 	th = 122.93191857 * M_PI / 180.0;
 
-	printf("Program do przeliczania uk≥adÛw wspÛ≥rzÍdnych.\nNaciúnij Enter aby rozpoczπÊ.\n");
+	printf("Program do przeliczania uk≈Çad√≥w wsp√≥rzƒôdnych.\nNaci≈õnij Enter aby rozpoczƒÖƒá.\n");
 	while ((getchar()) != 'n')
 	{
-		printf("Podaj uk≥ad poczatkowy 1=RÛwnikowy rÛwnonocny 2=RÛwnikowo godzinny 3=Horyzontalny 4=Ekliptyczny 5=Galaktyczny\n");
-		scanf_s("%d", &u1);
+		printf("Podaj uk≈Çad poczatkowy 1=R√≥wnikowy r√≥wnonocny 2=R√≥wnikowo godzinny 3=Horyzontalny 4=Ekliptyczny 5=Galaktyczny\n");
+		scanf("%d", &u1);
 
 		if (u1 != 1 && u1 != 2 && u1 != 3 && u1 != 4 && u1 != 5)
-			printf("èle wybrany uk≥ad!\n");
+			printf("≈πle wybrany uk≈Çad!\n");
 
 		else
 		{
-			printf("Podaj uk≥ad koÒcowy 1=RÛwnikowy rÛwnonocny 2=RÛwnikowo godzinny 3=Horyzontalny 4=Ekliptyczny 5=Galaktyczny\n");
-			scanf_s("%d", &u2);
+			printf("Podaj uk≈Çad ko≈Ñcowy 1=R√≥wnikowy r√≥wnonocny 2=R√≥wnikowo godzinny 3=Horyzontalny 4=Ekliptyczny 5=Galaktyczny\n");
+			scanf("%d", &u2);
 
 			if (u2 != 1 && u2 != 2 && u2 != 3 && u2 != 4 && u2 != 5)
-				printf("èle wybrany uk≥ad\n");
+				printf("≈πle wybrany uk≈Çad\n");
 
 			else
 			{
 				if (u1 == u2)
 				{
-					printf("Wybrano takie same uk≥ady odniesienia, dalsze dzia≥anie jest bezcelowe.\n");
+					printf("Wybrano takie same uk≈Çady odniesienia, dalsze dzia≈Çanie jest bezcelowe.\n");
 					break;
 				}
 				else
 				{
 					switch (u1)
 					{
-						/* Start rÛwnikowo rÛwnonocny */
+						/* Start rÔøΩwnikowo rÔøΩwnonocny */
 					case 1:
 						printf("Podaj rektascencje (format: h min sec)\n");
-						scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+						scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 						v[0] = hour2rad(k1);
 
-						if (v[0] < 0 || v[0]>2 * M_PI)
+						if (v[0] < 0 || v[0] > 2 * M_PI)
 						{
-							printf("èle wprowadzony kπt\n");
+							printf("≈πle wprowadzony kƒÖt\n");
 							break;
 						}
-						printf("Podaj deklinacjÍ (format: st min sec)\n");
-						scanf_s("%lf %lf %lf", &k2[0], &k2[1], &k2[2]);
+						printf("Podaj deklinacjƒô (format: st min sec)\n");
+						scanf("%lf %lf %lf", &k2[0], &k2[1], &k2[2]);
 						v[1] = st2rad(k2);
 						if (v[1] > M_PI / 2 || v[1] < -M_PI / 2)
 						{
-							printf("èle wprowadzony kπt\n");
+							printf("≈πle wprowadzony kƒÖt\n");
 							break;
 						}
 						sfer2vec(v);
@@ -98,12 +97,12 @@ int main(void)
 						{
 						case 2:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							obrot(3, t, v);
@@ -111,24 +110,24 @@ int main(void)
 							vec2sfer(v);
 							rad2hour(v[0], k1);
 							rad2st(v[1], k2);
-							printf("Kπt godzinny: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("KƒÖt godzinny: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
 							printf("Deklinacja: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 3:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							obrot(3, t, v);
 							v[1] = -v[1];
-							printf("Podaj szerokoúÊ geograficznπ obserwatora (format st min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							printf("Podaj szeroko≈õƒá geograficznƒÖ obserwatora (format st min sec)\n");
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							fi = st2rad(k1);
 							obrot(2, M_PI / 2 - fi, v);
 							obrot(3, -M_PI, v);
@@ -136,7 +135,7 @@ int main(void)
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
 							printf("Azymut:%.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("WysokoúÊ: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("Wysoko≈õƒá: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 4:
@@ -144,8 +143,8 @@ int main(void)
 							vec2sfer(v);
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
-							printf("D≥ugoúÊ ekliptyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("SzerokoúÊ ekliptyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("D≈Çugo≈õƒá ekliptyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("Szeroko≈õƒá ekliptyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 5:
@@ -155,30 +154,30 @@ int main(void)
 							vec2sfer(v);
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
-							printf("D≥ugoúÊ galaktyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("SzerokoúÊ galaktyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("D≈Çugo≈õƒá galaktyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("Szeroko≈õƒá galaktyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 						}
 						break;
 
-						/* Start rÛwnikowo godzinny*/
+						/* Start rÔøΩwnikowo godzinny*/
 
 					case 2:
-						printf("Podaj kπt godzinny (format: h min sec)\n");
-						scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+						printf("Podaj kƒÖt godzinny (format: h min sec)\n");
+						scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 						v[0] = hour2rad(k1);
 
-						if (v[0] < 0 || v[0]>2 * M_PI)
+						if (v[0] < 0 || v[0] > 2 * M_PI)
 						{
-							printf("èle wprowadzony kπt\n");
+							printf("≈πle wprowadzony kƒÖt\n");
 							break;
 						}
-						printf("Podaj deklinacjÍ (format: st min sec)\n");
-						scanf_s("%lf %lf %lf", &k2[0], &k2[1], &k2[2]);
+						printf("Podaj deklinacjƒô (format: st min sec)\n");
+						scanf("%lf %lf %lf", &k2[0], &k2[1], &k2[2]);
 						v[1] = st2rad(k2);
 						if (v[1] > M_PI / 2 || v[1] < -M_PI / 2)
 						{
-							printf("èle wprowadzony kπt\n");
+							printf("≈πle wprowadzony kƒÖt\n");
 							break;
 						}
 						sfer2vec(v);
@@ -187,12 +186,12 @@ int main(void)
 						{
 						case 1:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							v[1] = -v[1];
@@ -206,8 +205,8 @@ int main(void)
 							break;
 
 						case 3:
-							printf("Podaj szerokoúÊ geograficznπ obserwatora (format st min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							printf("Podaj szerokoÔøΩÔøΩ geograficznÔøΩ obserwatora (format st min sec)\n");
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							fi = st2rad(k1);
 							obrot(2, M_PI / 2 - fi, v);
 							obrot(3, -M_PI, v);
@@ -215,17 +214,17 @@ int main(void)
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
 							printf("Azymut:%.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("WysokoúÊ: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("WysokoÔøΩÔøΩ: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 4:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 
@@ -236,18 +235,18 @@ int main(void)
 							vec2sfer(v);
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
-							printf("D≥ugoúÊ ekliptyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("SzerokoúÊ ekliptyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("DÔøΩugoÔøΩÔøΩ ekliptyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("SzerokoÔøΩÔøΩ ekliptyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 5:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							v[1] = -v[1];
@@ -258,8 +257,8 @@ int main(void)
 							vec2sfer(v);
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
-							printf("D≥ugoúÊ galaktyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("SzerokoúÊ galaktyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("DÔøΩugoÔøΩÔøΩ galaktyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("SzerokoÔøΩÔøΩ galaktyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 						}
 						break;
@@ -268,25 +267,25 @@ int main(void)
 
 					case 3:
 						printf("Podaj azymut (format: st min sec)\n");
-						scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+						scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 						v[0] = st2rad(k1);
 
-						if (v[0] < 0 || v[0]>2 * M_PI)
+						if (v[0] < 0 || v[0] > 2 * M_PI)
 						{
-							printf("èle wprowadzony kπt\n");
+							printf("≈πle wprowadzony kƒÖt\n");
 							break;
 						}
-						printf("Podaj wysokoúÊ (format: st min sec)\n");
-						scanf_s("%lf %lf %lf", &k2[0], &k2[1], &k2[2]);
+						printf("Podaj wysokoÔøΩÔøΩ (format: st min sec)\n");
+						scanf("%lf %lf %lf", &k2[0], &k2[1], &k2[2]);
 						v[1] = st2rad(k2);
 						if (v[1] > M_PI / 2 || v[1] < -M_PI / 2)
 						{
-							printf("èle wprowadzony kπt\n");
+							printf("≈πle wprowadzony kƒÖt\n");
 							break;
 						}
 						sfer2vec(v);
-						printf("Podaj szerokoúÊ geograficznπ obserwatora (format st min sec)\n");
-						scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+						printf("Podaj szerokoÔøΩÔøΩ geograficznÔøΩ obserwatora (format st min sec)\n");
+						scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 						fi = st2rad(k1);
 						obrot(3, M_PI, v);
 						obrot(2, fi - M_PI / 2, v);
@@ -295,12 +294,12 @@ int main(void)
 						{
 						case 1:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							v[1] = -v[1];
@@ -317,18 +316,18 @@ int main(void)
 							vec2sfer(v);
 							rad2hour(v[0], k1);
 							rad2st(v[1], k2);
-							printf("Kπt godzinny: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("KÔøΩt godzinny: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
 							printf("Deklinacja: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 4:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							v[1] = -v[1];
@@ -338,18 +337,18 @@ int main(void)
 							vec2sfer(v);
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
-							printf("D≥ugoúÊ ekliptyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("SzerokoúÊ ekliptyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("DÔøΩugoÔøΩÔøΩ ekliptyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("SzerokoÔøΩÔøΩ ekliptyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 5:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							v[1] = -v[1];
@@ -361,8 +360,8 @@ int main(void)
 							vec2sfer(v);
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
-							printf("D≥ugoúÊ galaktyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("SzerokoúÊ galaktyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("DÔøΩugoÔøΩÔøΩ galaktyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("SzerokoÔøΩÔøΩ galaktyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 						}
 						break;
@@ -370,21 +369,21 @@ int main(void)
 						/* Start Ekliptyczny*/
 
 					case 4:
-						printf("Podaj d≥ugoúÊ ekliptycznπ (format: st min sec)\n");
-						scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+						printf("Podaj dÔøΩugoÔøΩÔøΩ ekliptycznÔøΩ (format: st min sec)\n");
+						scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 						v[0] = st2rad(k1);
 
-						if (v[0] < 0 || v[0]>2 * M_PI)
+						if (v[0] < 0 || v[0] > 2 * M_PI)
 						{
-							printf("èle wprowadzony kπt\n");
+							printf("≈πle wprowadzony kƒÖt\n");
 							break;
 						}
-						printf("Podaj szerokoúÊ ekliptycznπ (format: st min sec)\n");
-						scanf_s("%lf %lf %lf", &k2[0], &k2[1], &k2[2]);
+						printf("Podaj szerokoÔøΩÔøΩ ekliptycznÔøΩ (format: st min sec)\n");
+						scanf("%lf %lf %lf", &k2[0], &k2[1], &k2[2]);
 						v[1] = st2rad(k2);
 						if (v[1] > M_PI / 2 || v[1] < -M_PI / 2)
 						{
-							printf("èle wprowadzony kπt\n");
+							printf("≈πle wprowadzony kƒÖt\n");
 							break;
 						}
 						sfer2vec(v);
@@ -402,12 +401,12 @@ int main(void)
 
 						case 2:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							obrot(3, t, v);
@@ -415,24 +414,24 @@ int main(void)
 							vec2sfer(v);
 							rad2hour(v[0], k1);
 							rad2st(v[1], k2);
-							printf("Kπt godzinny: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("KÔøΩt godzinny: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
 							printf("Deklinacja: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 3:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							obrot(3, t, v);
 							v[1] = -v[1];
-							printf("Podaj szerokoúÊ geograficznπ obserwatora (format st min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							printf("Podaj szerokoÔøΩÔøΩ geograficznÔøΩ obserwatora (format st min sec)\n");
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							fi = st2rad(k1);
 							obrot(2, M_PI / 2 - fi, v);
 							obrot(3, -M_PI, v);
@@ -440,7 +439,7 @@ int main(void)
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
 							printf("Azymut:%.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("WysokoúÊ: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("WysokoÔøΩÔøΩ: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 5:
@@ -450,29 +449,29 @@ int main(void)
 							vec2sfer(v);
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
-							printf("D≥ugoúÊ galaktyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("SzerokoúÊ galaktyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("DÔøΩugoÔøΩÔøΩ galaktyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("SzerokoÔøΩÔøΩ galaktyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 						}
 						break;
 
 						/* Start galaktyczny */
 					case 5:
-						printf("Podaj d≥ugoúÊ galaktycznπ (format: st min sec)\n");
-						scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+						printf("Podaj dÔøΩugoÔøΩÔøΩ galaktycznÔøΩ (format: st min sec)\n");
+						scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 						v[0] = st2rad(k1);
 
-						if (v[0] < 0 || v[0]>2 * M_PI)
+						if (v[0] < 0 || v[0] > 2 * M_PI)
 						{
-							printf("èle wprowadzony kπt\n");
+							printf("≈πle wprowadzony kƒÖt\n");
 							break;
 						}
-						printf("Podaj szerokoúÊ szerokoúÊ galaktycznπ (format: st min sec)\n");
-						scanf_s("%lf %lf %lf", &k2[0], &k2[1], &k2[2]);
+						printf("Podaj szerokoÔøΩÔøΩ szerokoÔøΩÔøΩ galaktycznÔøΩ (format: st min sec)\n");
+						scanf("%lf %lf %lf", &k2[0], &k2[1], &k2[2]);
 						v[1] = st2rad(k2);
 						if (v[1] > M_PI / 2 || v[1] < -M_PI / 2)
 						{
-							printf("èle wprowadzony kπt\n");
+							printf("≈πle wprowadzony kƒÖt\n");
 							break;
 						}
 						sfer2vec(v);
@@ -492,12 +491,12 @@ int main(void)
 
 						case 2:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							obrot(3, t, v);
@@ -505,24 +504,24 @@ int main(void)
 							vec2sfer(v);
 							rad2hour(v[0], k1);
 							rad2st(v[1], k2);
-							printf("Kπt godzinny: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("KÔøΩt godzinny: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
 							printf("Deklinacja: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 3:
 							printf("Podaj miejscowy czas gwiazdowy (format: h min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							t = hour2rad(k1);
 
-							if (t < 0 || t>2 * M_PI)
+							if (t < 0 || t > 2 * M_PI)
 							{
-								printf("èle wprowadzona wspÛ≥rzÍdna\n");
+								printf("≈πle wprowadzona wsp√≥≈Çrzƒôdna\n");
 								break;
 							}
 							obrot(3, t, v);
 							v[1] = -v[1];
-							printf("Podaj szerokoúÊ geograficznπ obserwatora (format st min sec)\n");
-							scanf_s("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
+							printf("Podaj szerokoÔøΩÔøΩ geograficznÔøΩ obserwatora (format st min sec)\n");
+							scanf("%lf %lf %lf", &k1[0], &k1[1], &k1[2]);
 							fi = st2rad(k1);
 							obrot(2, M_PI / 2 - fi, v);
 							obrot(3, -M_PI, v);
@@ -530,7 +529,7 @@ int main(void)
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
 							printf("Azymut:%.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("WysokoúÊ: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("WysokoÔøΩÔøΩ: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 
 						case 4:
@@ -538,15 +537,15 @@ int main(void)
 							vec2sfer(v);
 							rad2st(v[0], k1);
 							rad2st(v[1], k2);
-							printf("D≥ugoúÊ ekliptyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
-							printf("SzerokoúÊ ekliptyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
+							printf("DÔøΩugoÔøΩÔøΩ ekliptyczna: %.0f %.0f %.6f\n", k1[0], k1[1], k1[2]);
+							printf("SzerokoÔøΩÔøΩ ekliptyczna: %.0f %.0f %.6f\n", k2[0], k2[1], k2[2]);
 							break;
 						}
 						break;
 					}
 				}
 			}
-			printf("KontynuowaÊ program t/n (Enter/n)\n");
+			printf("KontynuowaÔøΩ program t/n (Enter/n)\n");
 		}
 		getchar();
 	}
@@ -561,7 +560,7 @@ double obrot(int n, double k, double r[])
 	double M[3][3], work[3];
 	double s, c;
 	int i, j;
-	for (i = 0;i <= 2;i++)
+	for (i = 0; i <= 2; i++)
 		work[i] = 0;
 
 	s = sin(k);
@@ -604,17 +603,17 @@ double obrot(int n, double k, double r[])
 		M[2][2] = 1;
 	}
 
-	for (j = 0;j <= 2;j++)
-		for (i = 0;i <= 2;i++)
+	for (j = 0; j <= 2; j++)
+		for (i = 0; i <= 2; i++)
 			work[j] = work[j] + M[j][i] * r[i];
 
-	for (i = 0;i <= 2;i++)
+	for (i = 0; i <= 2; i++)
 		r[i] = work[i];
 
 	return 0;
 }
 
-/* Przejúcie z wspÛ≥rzÍdnych sferycznych do postaci wektorowej */
+/* PrzejÔøΩcie z wspÔøΩrzÔøΩdnych sferycznych do postaci wektorowej */
 
 double sfer2vec(double r[])
 {
@@ -629,12 +628,12 @@ double sfer2vec(double r[])
 	wynik[1] = s1 * c2;
 	wynik[2] = s2;
 
-	for (i = 0;i <= 2;i++)
+	for (i = 0; i <= 2; i++)
 		r[i] = wynik[i];
 
 	return 0;
 }
-/* Przejúcie z wektora do wspÛ≥rzÍdnych sferycznych */
+/* PrzejÔøΩcie z wektora do wspÔøΩrzÔøΩdnych sferycznych */
 
 double vec2sfer(double r[])
 {
@@ -646,7 +645,7 @@ double vec2sfer(double r[])
 	if (wynik[0] < 0)
 		wynik[0] = wynik[0] + 2 * M_PI;
 
-	for (i = 0;i <= 1;i++)
+	for (i = 0; i <= 1; i++)
 		r[i] = wynik[i];
 
 	return 0;
@@ -664,13 +663,12 @@ double st2rad(double r[])
 		r[2] = -r[2];
 	}
 
-
 	wynik = (r[0] + r[1] / 60.0 + r[2] / 3600.0) * M_PI / 180.0;
 
 	return wynik;
 }
 
-/* kπt godzinny na radiany */
+/* kÔøΩt godzinny na radiany */
 
 double hour2rad(double r[])
 {
@@ -722,12 +720,12 @@ double rad2st(double k, double r[])
 		wynik[0] = wynik[0] + 1;
 	}
 
-	for (i = 0;i <= 2;i++)
+	for (i = 0; i <= 2; i++)
 		r[i] = wynik[i];
 	return 0;
 }
 
-/* Radiany na kπt godzinny */
+/* Radiany na kÔøΩt godzinny */
 
 double rad2hour(double k, double r[])
 {
@@ -765,7 +763,7 @@ double rad2hour(double k, double r[])
 		wynik[0] = wynik[0] + 1;
 	}
 
-	for (i = 0;i <= 2;i++)
+	for (i = 0; i <= 2; i++)
 		r[i] = wynik[i];
 	return 0;
 }
