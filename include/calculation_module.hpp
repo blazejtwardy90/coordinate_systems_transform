@@ -14,4 +14,7 @@ public:
     double hour2rad(double* inputMatrix);
     void rad2degree(double inputRad, double* returnValue);
     void rad2hour(double inputRad, double* returnValue);
+
+    bool verifyInputPlaneAngle(double& inputangle);
+    bool verifyInputHeightAngle(double& inputangle);
 };

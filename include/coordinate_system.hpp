@@ -7,6 +7,7 @@ private:
 public:
     coordinate_system();
     virtual ~coordinate_system()= 0;
+    virtual bool Init() = 0;
     virtual bool ToEquatorialRA() = 0;
     virtual bool ToEquatorialHA() = 0;
     virtual bool ToSystemC() = 0;

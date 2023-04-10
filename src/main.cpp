@@ -8,66 +8,71 @@ int main()
 {
     int u1 = 0, u2 = 0;
     std::shared_ptr<coordinate_system> spCoordinateSystem;
+    bool correctInput = true;
 
     do 
-    { 
+    {
+        correctInput = true;
         printf("Podaj układ poczatkowy 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horyzontalny 4=Ekliptyczny 5=Galaktyczny\n");
 		scanf("%d", &u1);
-
-        if (u1 != 1 && u1 != 2)
+        switch (u1)
         {
-            printf("Wrong coordinate system\n");
+            case 1:
+            {
+                spCoordinateSystem = std::make_shared<EquatorialRA>();
+                correctInput = spCoordinateSystem->Init();
+                break;
+            }
+            case 2:
+            {
+                spCoordinateSystem = std::make_shared<EquatorialHA>();
+                correctInput = spCoordinateSystem->Init();
+                break;
+            }
+            default:
+            {
+                printf("Wrong coordinate system\n");
+                correctInput = false;
+                break;
+            }
         }
-        else
+        
+        if (correctInput == false)
         {
-            switch (u1)
-            {
-                case 1:
+            printf("Wrong input\n");
+            continue;
+        }
+
+        printf("Podaj układ końcowy 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horyzontalny 4=Ekliptyczny 5=Galaktyczny\n");
+		scanf("%d", &u2);
+        switch (u2)
+        {
+            case 1:
                 {
-                    spCoordinateSystem = std::make_shared<EquatorialRA>();
+                    if (spCoordinateSystem->ToEquatorialRA())
+                    {
+                        printf("Calculation completed\n");
+                    }
+                    else
+                    {
+                        printf("Wrong system\n");
+                    }
                     break;
                 }
-                case 2:
+            case 2:
                 {
-                    spCoordinateSystem = std::make_shared<EquatorialHA>();
+                    if (spCoordinateSystem->ToEquatorialHA())
+                    {
+                        printf("Calculation completed\n");
+                    }
+                    else
+                    {
+                        printf("Wrong system\n");
+                    }
                     break;
                 }
-                default:
-                    break;
-            }
-
-            printf("Podaj układ końcowy 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horyzontalny 4=Ekliptyczny 5=Galaktyczny\n");
-			scanf("%d", &u2);
-
-            switch (u2)
-            {
-                case 1:
-                    {
-                        if (spCoordinateSystem->ToEquatorialRA())
-                        {
-                            printf("Calculation completed\n");
-                        }
-                        else
-                        {
-                            printf("Wrong system\n");
-                        }
-                        break;
-                    }
-                case 2:
-                    {
-                        if (spCoordinateSystem->ToEquatorialHA())
-                        {
-                            printf("Calculation completed\n");
-                        }
-                        else
-                        {
-                            printf("Wrong system\n");
-                        }
-                        break;
-                    }
-                default:
-                    break;
-            }
+            default:
+                break;
         }
         printf("Continue program? (Y/n)\n");
         getchar();

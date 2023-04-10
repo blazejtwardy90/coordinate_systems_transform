@@ -215,3 +215,21 @@ void calculation_module::rad2hour(double inputRad, double *returnValue)
 	for (i = 0; i <= 2; i++)
 		returnValue[i] = work[i];
 }
+
+bool calculation_module::verifyInputPlaneAngle(double &inputangle)
+{
+	if (inputangle < 0 || inputangle > 2 * M_PI)
+	{
+		return false;
+	}
+    return true;
+}
+
+bool calculation_module::verifyInputHeightAngle(double &inputangle)
+{
+	if (inputangle > M_PI / 2 || inputangle < -M_PI / 2)
+	{
+		return false;
+	}
+    return true;
+}

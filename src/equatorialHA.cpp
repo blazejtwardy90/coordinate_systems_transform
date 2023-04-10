@@ -4,20 +4,41 @@
 
 EquatorialHA::EquatorialHA(/* args */)
 {
-    printf("Podaj rektascencje (format: h min sec)\n");
-	scanf("%lf %lf %lf", &recAngle[0], &recAngle[1], &recAngle[2]);
-
-    printf("Podaj deklinację (format: st min sec)\n");
-	scanf("%lf %lf %lf", &decAngle[0], &decAngle[1], &decAngle[2]);
 }
 
 EquatorialHA::~EquatorialHA()
 {
 }
 
+bool EquatorialHA::Init()
+{
+    printf("Input hour angle (format: h min sec)\n");
+	scanf("%lf %lf %lf", &_hourAngle[0], &_hourAngle[1], &_hourAngle[2]);
+
+    _coordinatesRad[0] = _CalcModule.hour2rad(_hourAngle);
+
+    if (_CalcModule.verifyInputPlaneAngle(_coordinatesRad[0]) == false)
+    {
+        return false;
+    }
+
+    printf("Input declination (format: st min sec)\n");
+	scanf("%lf %lf %lf", &_decAngle[0], &_decAngle[1], &_decAngle[2]);
+
+     _coordinatesRad[1] = _CalcModule.degree2rad(_decAngle);
+    if (_CalcModule.verifyInputHeightAngle(_coordinatesRad[1]) == false)
+    {
+        return false;
+    }
+
+    _CalcModule.spher2vec(_coordinatesRad);
+    
+    return true;
+}
+
 bool EquatorialHA::ToEquatorialRA() 
 {   
-    _CalculationModule.passiveRotation(1, 2.0, recAngle);
+    _CalcModule.passiveRotation(1, 2.0, _hourAngle);
 
     return true;    
 };

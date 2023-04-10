@@ -7,13 +7,15 @@ class EquatorialHA :public coordinate_system
 {
 private:
     /* data */
-    double recAngle[3];
-    double decAngle[3];
-    calculation_module _CalculationModule;
+    double _hourAngle[3];
+    double _decAngle[3];
+    double _coordinatesRad[3];
+    calculation_module _CalcModule;
 
 public:
     EquatorialHA(/* args */);
     ~EquatorialHA();
+    bool Init();
     virtual bool ToEquatorialRA();
     virtual bool ToEquatorialHA() {return false;};
     virtual bool ToSystemC() {return true;};
