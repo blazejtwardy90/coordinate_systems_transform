@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "equatorialRA.hpp"
+#include <math.h>
 
 EquatorialRA::EquatorialRA(/* args */)
 {
@@ -58,6 +59,41 @@ bool EquatorialRA::ToEquatorialHA()
 
 	printf("Hour Angle: %.0f %.0f %.6f\n", hourAngleReturn[0], hourAngleReturn[1], hourAngleReturn[2]);
 	printf("Declination: %.0f %.0f %.6f\n", declinationReturn[0], declinationReturn[1], declinationReturn[2]);
+
+    return true;
+}
+
+bool EquatorialRA::ToHorizontal()
+{
+    double siderealTime[3];
+    double timeRad = 0.0;
+    double azimutReturn[3];
+    double heightReturn[3];
+    double latitude[3];
+    double latitudeRad = 0.0;
+
+    printf("Input local sidereal time (format: h min sec)\n");
+	scanf("%lf %lf %lf", &siderealTime[0], &siderealTime[1], &siderealTime[2]);
+	timeRad = _CalcModule.hour2rad(siderealTime);
     
+	if (_CalcModule.verifyInputPlaneAngle(timeRad) == false)
+	{
+		return false;
+	}
+    _CalcModule.passiveRotation(Z_AXIS, timeRad, _coordinatesRad);
+	_coordinatesRad[1] = -_coordinatesRad[1];
+    printf("Input observer latitude (format st min sec)\n");
+	scanf("%lf %lf %lf", &latitude[0], &latitude[1], &latitude[2]);
+    
+    latitudeRad = _CalcModule.degree2rad(latitude);
+    _CalcModule.passiveRotation(Y_AXIS, M_PI / 2 - latitudeRad, _coordinatesRad);
+    _CalcModule.passiveRotation(Z_AXIS, -M_PI, _coordinatesRad);
+    _CalcModule.vec2spher(_coordinatesRad);
+    _CalcModule.rad2degree(_coordinatesRad[0], azimutReturn);
+    _CalcModule.rad2degree(_coordinatesRad[1], heightReturn);
+
+    printf("Azimuth: %.0f %.0f %.6f\n", azimutReturn[0], azimutReturn[1], azimutReturn[2]);
+    printf("Height: %.0f %.0f %.6f\n", heightReturn[0], heightReturn[1], heightReturn[2]);
+
     return true;
 }

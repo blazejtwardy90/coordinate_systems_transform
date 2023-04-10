@@ -21,7 +21,7 @@ public:
     virtual bool Init();
     virtual bool ToEquatorialRA() {return false;};
     virtual bool ToEquatorialHA();
-    virtual bool ToSystemC() {return true;};
+    virtual bool ToHorizontal();
     virtual bool ToSystemD() {return true;};
     virtual bool ToSystemE() {return true;};
 };

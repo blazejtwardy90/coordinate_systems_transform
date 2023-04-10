@@ -10,7 +10,7 @@ public:
     virtual bool Init() = 0;
     virtual bool ToEquatorialRA() = 0;
     virtual bool ToEquatorialHA() = 0;
-    virtual bool ToSystemC() = 0;
+    virtual bool ToHorizontal() = 0;
     virtual bool ToSystemD() = 0;
     virtual bool ToSystemE() = 0;
 };
