@@ -11,7 +11,7 @@ int main()
     int u1 = 0, u2 = 0;
     std::shared_ptr<coordinate_system> spCoordinateSystem;
 
-    while ( getchar() != 'n')
+    do 
     { 
         printf("Podaj układ poczatkowy 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horyzontalny 4=Ekliptyczny 5=Galaktyczny\n");
 		scanf("%d", &u1);
@@ -73,7 +73,7 @@ int main()
         }
         printf("Continue program? (Y/n)\n");
         getchar();
-    }
+    } while ( getchar() != 'n');
 
     printf("Coordinate transform reborn\n");
     return 0;
