@@ -1,12 +1,12 @@
 #include <stdio.h>
 #define _USE_MATH_DEFINES
-#include <cmath>
+#include <math.h>
 
 /*Program do transfomracji mi�dzu uk�adami wsp�rz�dnych*/
 
 /* Prototypy funkcji */
-double obrot(int n, double k, double r[]);
-double sfer2vec(double r[]);
+double obrot(int n, double k, double* r);
+double sfer2vec(double* r);
 double vec2sfer(double r[]);
 double st2rad(double r[]);
 double hour2rad(double r[]);
@@ -24,6 +24,7 @@ int main(void)
 	E[1] = 26;
 	E[2] = 21.448;
 	e = st2rad(E);
+
 
 	/* Wsp�rz�dne r�wnikowo r�wnonocne dla gal */
 
@@ -555,7 +556,7 @@ int main(void)
 
 /* Obrocik Pasywny */
 
-double obrot(int n, double k, double r[])
+double obrot(int n, double k, double* r)
 {
 	double M[3][3], work[3];
 	double s, c;
@@ -615,7 +616,7 @@ double obrot(int n, double k, double r[])
 
 /* Przej�cie z wsp�rz�dnych sferycznych do postaci wektorowej */
 
-double sfer2vec(double r[])
+double sfer2vec(double* r)
 {
 	double wynik[3], s1, c1, s2, c2;
 	int i;
