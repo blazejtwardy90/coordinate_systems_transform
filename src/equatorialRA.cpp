@@ -18,12 +18,14 @@ EquatorialRA::~EquatorialRA()
 
 bool EquatorialRA::Init()
 {
+    double rightAscDeclination[2];
+
     printf("Input right ascension (format: h min sec)\n");
 	scanf("%lf %lf %lf", &_recAngle[0], &_recAngle[1], &_recAngle[2]);
 
-    _coordinatesRad[0] = _CalcModule.hour2rad(_recAngle);
+    rightAscDeclination[0] = _CalcModule.hour2rad(_recAngle);
 
-    if (_CalcModule.verifyInputPlaneAngle(_coordinatesRad[0]) == false)
+    if (_CalcModule.verifyInputPlaneAngle(rightAscDeclination[0]) == false)
     {
         return false;
     }
@@ -31,13 +33,14 @@ bool EquatorialRA::Init()
     printf("Input declination (format: st min sec)\n");
 	scanf("%lf %lf %lf", &_decAngle[0], &_decAngle[1], &_decAngle[2]);
 
-    _coordinatesRad[1] = _CalcModule.degree2rad(_decAngle);
-    if (_CalcModule.verifyInputHeightAngle(_coordinatesRad[1]) == false)
+    rightAscDeclination[1] = _CalcModule.degree2rad(_decAngle);
+
+    if (_CalcModule.verifyInputHeightAngle(rightAscDeclination[1]) == false)
     {
         return false;
     }
 
-    _CalcModule.spher2vec(_coordinatesRad);
+    _CalcModule.spher2vec(rightAscDeclination, _coordinatesRad);
 
     return true;
 }
@@ -48,6 +51,7 @@ bool EquatorialRA::ToEquatorialHA()
     double timeRad = 0.0;
     double hourAngleReturn[3];
     double declinationReturn[3];
+    double sphereCoord[2];
 
     printf("Input local sidereal time (format: h min sec)\n");
 	scanf("%lf %lf %lf", &siderealTime[0], &siderealTime[1], &siderealTime[2]);
@@ -59,9 +63,9 @@ bool EquatorialRA::ToEquatorialHA()
 	}
 	_CalcModule.passiveRotation(Z_AXIS, timeRad, _coordinatesRad);
 	_coordinatesRad[1] = -_coordinatesRad[1];
-    _CalcModule.vec2spher(_coordinatesRad);
-    _CalcModule.rad2hour(_coordinatesRad[0], hourAngleReturn);
-    _CalcModule.rad2degree(_coordinatesRad[1], declinationReturn);
+    _CalcModule.vec2spher(_coordinatesRad, sphereCoord);
+    _CalcModule.rad2hour(sphereCoord[0], hourAngleReturn);
+    _CalcModule.rad2degree(sphereCoord[1], declinationReturn);
 
 	printf("Hour Angle: %.0f %.0f %.6f\n", hourAngleReturn[0], hourAngleReturn[1], hourAngleReturn[2]);
 	printf("Declination: %.0f %.0f %.6f\n", declinationReturn[0], declinationReturn[1], declinationReturn[2]);
@@ -77,6 +81,7 @@ bool EquatorialRA::ToHorizontal()
     double heightReturn[3];
     double latitude[3];
     double latitudeRad = 0.0;
+    double sphereCoord[2];
 
     printf("Input local sidereal time (format: h min sec)\n");
 	scanf("%lf %lf %lf", &siderealTime[0], &siderealTime[1], &siderealTime[2]);
@@ -94,12 +99,38 @@ bool EquatorialRA::ToHorizontal()
     latitudeRad = _CalcModule.degree2rad(latitude);
     _CalcModule.passiveRotation(Y_AXIS, M_PI / 2 - latitudeRad, _coordinatesRad);
     _CalcModule.passiveRotation(Z_AXIS, -M_PI, _coordinatesRad);
-    _CalcModule.vec2spher(_coordinatesRad);
-    _CalcModule.rad2degree(_coordinatesRad[0], azimutReturn);
-    _CalcModule.rad2degree(_coordinatesRad[1], heightReturn);
+    _CalcModule.vec2spher(_coordinatesRad, sphereCoord);
+    _CalcModule.rad2degree(sphereCoord[0], azimutReturn);
+    _CalcModule.rad2degree(sphereCoord[1], heightReturn);
 
     printf("Azimuth: %.0f %.0f %.6f\n", azimutReturn[0], azimutReturn[1], azimutReturn[2]);
     printf("Height: %.0f %.0f %.6f\n", heightReturn[0], heightReturn[1], heightReturn[2]);
+
+    return true;
+}
+
+bool EquatorialRA::ToEcliptic()
+{
+    double eclipticIncl[3];
+    double eclipticLongitude[3];
+    double eclipticLatitude[3];
+    double sphereCoord[2];
+    double eclipticInclRad = 0.0;
+    
+    eclipticIncl[0] = 0;
+    eclipticIncl[1] = 26;
+	eclipticIncl[2] = 21.448;
+	
+    eclipticInclRad = _CalcModule.degree2rad(eclipticIncl);
+
+    _CalcModule.passiveRotation(X_AXIS, eclipticInclRad, _coordinatesRad);
+    _CalcModule.vec2spher(_coordinatesRad, sphereCoord);
+
+    _CalcModule.rad2degree(sphereCoord[0], eclipticLongitude);
+    _CalcModule.rad2degree(sphereCoord[1], eclipticLatitude);
+
+    printf("Ecliptic longitude: %.0f %.0f %.6f\n", eclipticLongitude[0], eclipticLongitude[1], eclipticLongitude[2]);
+	printf("Ecliptic latitude: %.0f %.0f %.6f\n", eclipticLatitude[0], eclipticLatitude[1], eclipticLatitude[2]);
 
     return true;
 }

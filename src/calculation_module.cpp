@@ -76,7 +76,7 @@ void calculation_module::passiveRotation(int axis, double rotAngle, double *inpu
 	}
 }
 
-void calculation_module::spher2vec(double* inputMatrix)
+void calculation_module::spher2vec(double* inputMatrix, double* outputMatrix)
 {
 	double returnMatrix[3], s1, c1, s2, c2;
 
@@ -90,11 +90,11 @@ void calculation_module::spher2vec(double* inputMatrix)
 
 	for (int index = 0; index <= 2; index++)
 	{
-		inputMatrix[index] = returnMatrix[index];
+		outputMatrix[index] = returnMatrix[index];
 	}
 }
 
-void calculation_module::vec2spher(double *inputMatrix)
+void calculation_module::vec2spher(double *inputMatrix, double* outputMatrix)
 {
 	double work[2];
 	work[1] = asin(inputMatrix[2]);
@@ -106,7 +106,7 @@ void calculation_module::vec2spher(double *inputMatrix)
 	}
 	for ( int index = 0; index <= 1; index++)
 	{
-		inputMatrix[index] = work[index];
+		outputMatrix[index] = work[index];
 	}
 }
 

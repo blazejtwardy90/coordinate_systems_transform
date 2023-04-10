@@ -15,7 +15,7 @@ int main()
     do 
     {
         correctInput = true;
-        printf("Enter starting system: 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horizontal 4=Ekliptyczny 5=Galaktyczny\n");
+        printf("Enter starting system: 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horizontal 4=Ecliptic 5=Galaktyczny\n");
 		scanf("%d", &u1);
         switch (u1)
         {
@@ -84,6 +84,17 @@ int main()
                         printf("Error\n");
                     }
                     break;
+                }
+            case 4:
+                {
+                    if (spCoordinateSystem->ToEcliptic())
+                    {
+                        printf("Calculation completed\n");
+                    }
+                    else
+                    {
+                        printf("Error\n");
+                    }
                 }
             default:
             {
