@@ -58,5 +58,6 @@ bool EquatorialRA::ToEquatorialHA()
 
 	printf("Hour Angle: %.0f %.0f %.6f\n", hourAngleReturn[0], hourAngleReturn[1], hourAngleReturn[2]);
 	printf("Declination: %.0f %.0f %.6f\n", declinationReturn[0], declinationReturn[1], declinationReturn[2]);
-    return false;
+    
+    return true;
 }

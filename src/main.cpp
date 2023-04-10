@@ -74,8 +74,18 @@ int main()
                     break;
                 }
             default:
+            {
+                printf("Wrong coordinate system\n");
+                correctInput = false;
                 break;
+            }
         }
+        if (correctInput == false)
+        {
+            printf("Wrong input\n");
+            continue;
+        }
+
         printf("Continue program? (Y/n)\n");
         getchar();
     } while ( getchar() != 'n');
