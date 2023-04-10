@@ -4,6 +4,12 @@
 
 EquatorialRA::EquatorialRA(/* args */)
 {
+    for (int index = 0; index < 3; index++)
+    {
+        _recAngle[index] = 0;
+        _decAngle[index] = 0;
+        _coordinatesRad[index] = 0;
+    }
 }
 
 EquatorialRA::~EquatorialRA()
