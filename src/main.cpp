@@ -38,7 +38,7 @@ int main()
                     break;
             }
 
-            printf("Podaj układ końcowy 1=Równikowy równonocny 2=Równikowo godzinny 3=Horyzontalny 4=Ekliptyczny 5=Galaktyczny\n");
+            printf("Podaj układ końcowy 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horyzontalny 4=Ekliptyczny 5=Galaktyczny\n");
 			scanf("%d", &u2);
 
             switch (u2)
