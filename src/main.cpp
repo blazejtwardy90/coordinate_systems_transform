@@ -95,6 +95,7 @@ int main()
                     {
                         printf("Error\n");
                     }
+                    break;
                 }
             default:
             {
