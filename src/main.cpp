@@ -75,7 +75,8 @@ int main()
                 }
             case 3:
                 {
-                    if (spCoordinateSystem->ToHorizontal())
+                    std::vector<double> inputVector;
+                    if (spCoordinateSystem->ToHorizontal(inputVector))
                     {
                         printf("Calculation completed\n");
                     }

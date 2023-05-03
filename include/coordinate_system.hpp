@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 class coordinate_system
 {
@@ -9,8 +10,8 @@ public:
     virtual ~coordinate_system()= 0;
     virtual bool Init() = 0;
     virtual bool ToEquatorialRA() = 0;
-    virtual bool ToEquatorialHA() = 0;
-    virtual bool ToHorizontal() = 0;
+    virtual bool ToEquatorialHA() = 0;  
+    virtual bool ToHorizontal(std::vector<double> inputArg ) = 0; 
     virtual bool ToEcliptic() = 0;
     virtual bool ToSystemE() = 0;
 };

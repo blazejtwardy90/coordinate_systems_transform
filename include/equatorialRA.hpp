@@ -21,7 +21,7 @@ public:
     virtual bool Init();
     virtual bool ToEquatorialRA() {return false;};
     virtual bool ToEquatorialHA();
-    virtual bool ToHorizontal();
+    virtual bool ToHorizontal(std::vector<double> inputArg);
     virtual bool ToEcliptic();
     virtual bool ToSystemE() {return true;};
 };

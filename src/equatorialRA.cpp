@@ -73,7 +73,7 @@ bool EquatorialRA::ToEquatorialHA()
     return true;
 }
 
-bool EquatorialRA::ToHorizontal()
+bool EquatorialRA::ToHorizontal(std::vector<double> inputArg)
 {
     double siderealTime[3];
     double timeRad = 0.0;
