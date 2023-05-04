@@ -6,7 +6,8 @@
 
 int main()
 {
-    int u1 = 0, u2 = 0;
+    int startingSystem = 0; 
+    int endSystem = 0;
     std::shared_ptr<coordinate_system> spCoordinateSystem;
     bool correctInput = true;
     
@@ -16,8 +17,8 @@ int main()
     {
         correctInput = true;
         printf("Enter starting system: 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horizontal 4=Ecliptic 5=Galaktyczny\n");
-		scanf("%d", &u1);
-        switch (u1)
+		scanf("%d", &startingSystem);
+        switch (startingSystem)
         {
             case 1:
             {
@@ -46,8 +47,8 @@ int main()
         }
 
         printf("Enter ending system: 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horizontal 4=Ekliptyczny 5=Galaktyczny\n");
-		scanf("%d", &u2);
-        switch (u2)
+		scanf("%d", &endSystem);
+        switch (endSystem)
         {
             case 1:
                 {
