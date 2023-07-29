@@ -99,6 +99,18 @@ int main()
                     }
                     break;
                 }
+            case 5:
+            {
+                if (spCoordinateSystem->ToGalactic())
+                {
+                    printf("Calculation completed\n");
+                }
+                else
+                {
+                    printf("Error\n");
+                }
+                break;
+            }
             default:
             {
                 printf("Wrong coordinate system\n");

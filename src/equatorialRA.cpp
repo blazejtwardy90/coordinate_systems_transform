@@ -10,13 +10,6 @@ EquatorialRA::EquatorialRA(/* args */)
         _decAngle[index] = 0;
         _coordinatesRad[index] = 0;
     }
-    _RAForGalatic[0] = 12;
-	_RAForGalatic[1] = 51;
-	_RAForGalatic[2] = 26.27549;
-    
-    _DecForGalactic[0] = 27; 
-    _DecForGalactic[1] = 7;
-    _DecForGalactic[2] = 42.7048;
 }
 
 EquatorialRA::~EquatorialRA()
@@ -26,9 +19,6 @@ EquatorialRA::~EquatorialRA()
 bool EquatorialRA::Init()
 {
     double rightAscDeclination[2];
-
-    _RAForGalRadValue = _CalcModule.hour2rad(_RAForGalatic);
-    _DecRadValue = _CalcModule.hour2rad(_DecForGalactic);
 
     printf("Input right ascension (format: h min sec)\n");
 	scanf("%lf %lf %lf", &_recAngle[0], &_recAngle[1], &_recAngle[2]);
@@ -147,5 +137,54 @@ bool EquatorialRA::ToEcliptic()
 
 bool EquatorialRA::ToGalactic()
 {
-    return false;
+    double RAForGalactic[3];
+    double RAForGalacticRadValue = 0.0;
+
+    double DecForGalactic[3];
+    double DecForGalacticRadValue = 0.0;
+
+    double eclipticIncl[3];
+    double eclipticInclRad = 0.0;
+
+    double sphereCoordinates[2];
+    double galacticLongitude[3];
+    double galacticLatitude[3];
+    
+    for (int index = 0; index < 3; index++)
+    {
+        galacticLatitude[index] = 0;
+        galacticLongitude[index] = 0;
+    }
+    
+    double theta = 122.93191857 * M_PI / 180.0;
+
+    eclipticIncl[0] = 0;
+    eclipticIncl[1] = 26;
+	eclipticIncl[2] = 21.448;
+	
+
+    RAForGalactic[0] = 12;
+	RAForGalactic[1] = 51;
+	RAForGalactic[2] = 26.27549;
+    
+    DecForGalactic[0] = 27; 
+    DecForGalactic[1] = 7;
+    DecForGalactic[2] = 42.7048;
+
+    RAForGalacticRadValue = _CalcModule.hour2rad(RAForGalactic);
+    DecForGalacticRadValue = _CalcModule.hour2rad(DecForGalactic);
+    eclipticInclRad = _CalcModule.degree2rad(eclipticIncl);
+
+    _CalcModule.passiveRotation(Z_AXIS, M_PI/2 + RAForGalacticRadValue, _coordinatesRad);
+    _CalcModule.passiveRotation(X_AXIS, M_PI/2 - DecForGalacticRadValue, _coordinatesRad);
+    _CalcModule.passiveRotation(Z_AXIS, M_PI/2 - theta, _coordinatesRad);
+
+    _CalcModule.vec2spher(_coordinatesRad, sphereCoordinates);
+    _CalcModule.rad2degree(sphereCoordinates[0], galacticLongitude);
+    _CalcModule.rad2degree(sphereCoordinates[1], galacticLatitude);
+
+    printf("Galactic longitude: %.0f %.0f %.6f\n", galacticLongitude[0], galacticLongitude[1], galacticLongitude[2]);
+	printf("Galactic latitude: %.0f %.0f %.6f\n", galacticLatitude[0], galacticLatitude[1], galacticLatitude[2]);
+    
+    return true;
 }

@@ -14,12 +14,6 @@ private:
     double _decAngle[3];
     double _coordinatesRad[3];
 
-    double _RAForGalatic[3];
-    double _RAForGalRadValue;
-    
-    double _DecForGalactic[3];
-    double _DecRadValue;
-
     calculation_module _CalcModule;
 public:
     EquatorialRA(/* args */);
