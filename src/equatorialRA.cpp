@@ -10,6 +10,13 @@ EquatorialRA::EquatorialRA(/* args */)
         _decAngle[index] = 0;
         _coordinatesRad[index] = 0;
     }
+    _RAForGalatic[0] = 12;
+	_RAForGalatic[1] = 51;
+	_RAForGalatic[2] = 26.27549;
+    
+    _DecForGalactic[0] = 27; 
+    _DecForGalactic[1] = 7;
+    _DecForGalactic[2] = 42.7048;
 }
 
 EquatorialRA::~EquatorialRA()
@@ -19,6 +26,9 @@ EquatorialRA::~EquatorialRA()
 bool EquatorialRA::Init()
 {
     double rightAscDeclination[2];
+
+    _RAForGalRadValue = _CalcModule.hour2rad(_RAForGalatic);
+    _DecRadValue = _CalcModule.hour2rad(_DecForGalactic);
 
     printf("Input right ascension (format: h min sec)\n");
 	scanf("%lf %lf %lf", &_recAngle[0], &_recAngle[1], &_recAngle[2]);
@@ -133,4 +143,9 @@ bool EquatorialRA::ToEcliptic()
 	printf("Ecliptic latitude: %.0f %.0f %.6f\n", eclipticLatitude[0], eclipticLatitude[1], eclipticLatitude[2]);
 
     return true;
+}
+
+bool EquatorialRA::ToGalactic()
+{
+    return false;
 }

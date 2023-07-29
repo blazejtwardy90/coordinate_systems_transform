@@ -13,5 +13,5 @@ public:
     virtual bool ToEquatorialHA() = 0;  
     virtual bool ToHorizontal(std::vector<double> inputArg ) = 0; 
     virtual bool ToEcliptic() = 0;
-    virtual bool ToSystemE() = 0;
+    virtual bool ToGalactic() = 0;
 };

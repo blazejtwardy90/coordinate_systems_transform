@@ -14,6 +14,12 @@ private:
     double _decAngle[3];
     double _coordinatesRad[3];
 
+    double _RAForGalatic[3];
+    double _RAForGalRadValue;
+    
+    double _DecForGalactic[3];
+    double _DecRadValue;
+
     calculation_module _CalcModule;
 public:
     EquatorialRA(/* args */);
@@ -23,5 +29,5 @@ public:
     virtual bool ToEquatorialHA();
     virtual bool ToHorizontal(std::vector<double> inputArg);
     virtual bool ToEcliptic();
-    virtual bool ToSystemE() {return true;};
+    virtual bool ToGalactic();
 };
