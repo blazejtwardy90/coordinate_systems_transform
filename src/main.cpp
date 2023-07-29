@@ -16,7 +16,7 @@ int main()
     do 
     {
         correctInput = true;
-        printf("Enter starting system: 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horizontal 4=Ecliptic 5=Galaktyczny\n");
+        printf("Enter starting system: 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horizontal 4=Ecliptic 5=Galactic\n");
 		scanf("%d", &startingSystem);
         switch (startingSystem)
         {
@@ -46,7 +46,7 @@ int main()
             continue;
         }
 
-        printf("Enter ending system: 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horizontal 4=Ekliptyczny 5=Galaktyczny\n");
+        printf("Enter ending system: 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horizontal 4=Ecliptic 5=Galactic\n");
 		scanf("%d", &endSystem);
         switch (endSystem)
         {

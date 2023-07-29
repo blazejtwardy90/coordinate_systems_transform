@@ -172,7 +172,7 @@ bool EquatorialRA::ToGalactic()
     DecForGalactic[2] = 42.7048;
 
     RAForGalacticRadValue = _CalcModule.hour2rad(RAForGalactic);
-    DecForGalacticRadValue = _CalcModule.hour2rad(DecForGalactic);
+    DecForGalacticRadValue = _CalcModule.degree2rad(DecForGalactic);
     eclipticInclRad = _CalcModule.degree2rad(eclipticIncl);
 
     _CalcModule.passiveRotation(Z_AXIS, M_PI/2 + RAForGalacticRadValue, _coordinatesRad);
