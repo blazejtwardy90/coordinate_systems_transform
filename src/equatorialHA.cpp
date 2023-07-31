@@ -58,7 +58,7 @@ bool EquatorialHA::ToHorizontal(std::vector<double> inputArg)
         printf("Input observer latitude (format st min sec)\n");
         scanf("%lf %lf %lf", &latitude[0], &latitude[1], &latitude[2]);
         latitudeRadValue = _CalcModule.degree2rad(latitude);
-        _CalcModule.passiveRotation(Y_AXIS, M_PI/2, _coordinatesRad);
+        _CalcModule.passiveRotation(Y_AXIS, M_PI/2 - latitudeRadValue, _coordinatesRad);
         _CalcModule.passiveRotation(Z_AXIS, -M_PI, _coordinatesRad);
         _CalcModule.vec2spher(_coordinatesRad, sphereMatrix );
 
