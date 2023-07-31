@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <memory>
+#include "iomanip"
 #include "coordinate_system.hpp"
 #include "equatorialRA.hpp"
 #include "equatorialHA.hpp"
@@ -11,6 +12,8 @@ int main()
     std::shared_ptr<coordinate_system> spCoordinateSystem;
     bool correctInput = true;
     
+    std::setprecision(10);
+
     printf("\033[0;34m ---Coordinate transform reborn--- \033[0m \n");
 
     do 
@@ -100,23 +103,23 @@ int main()
                     break;
                 }
             case 5:
-            {
-                if (spCoordinateSystem->ToGalactic())
                 {
-                    printf("Calculation completed\n");
+                    if (spCoordinateSystem->ToGalactic())
+                    {
+                        printf("Calculation completed\n");
+                    }
+                    else
+                    {
+                        printf("Error\n");
+                    }
+                    break;
                 }
-                else
-                {
-                    printf("Error\n");
-                }
-                break;
-            }
             default:
-            {
-                printf("Wrong coordinate system\n");
-                correctInput = false;
-                break;
-            }
+                {
+                    printf("Wrong coordinate system\n");
+                    correctInput = false;
+                    break;
+                }
         }
         if (correctInput == false)
         {

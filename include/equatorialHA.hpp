@@ -21,4 +21,7 @@ public:
     virtual bool ToHorizontal(std::vector<double> inputArg);
     virtual bool ToEcliptic() {return true;};
     virtual bool ToGalactic() {return true;};
+
+private:
+    void InitiatedMatrixesInVector(std::vector<double*>& vectorWithMatrixes);
 };

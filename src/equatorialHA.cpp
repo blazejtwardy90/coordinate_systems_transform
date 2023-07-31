@@ -53,6 +53,8 @@ bool EquatorialHA::ToHorizontal(std::vector<double> inputArg)
     double outputAzimuthMatrix[3];
     double outputHeighthMatrix[3];
 
+    _CalcModule.initiateMatrix(outputAzimuthMatrix, sizeof(outputAzimuthMatrix)/sizeof(outputAzimuthMatrix[0]));
+
     try
     {
         printf("Input observer latitude (format st min sec)\n");
@@ -74,4 +76,12 @@ bool EquatorialHA::ToHorizontal(std::vector<double> inputArg)
         return false;
     }
     return true;
+}
+
+//TODO: Needs testing
+void EquatorialHA::InitiatedMatrixesInVector(std::vector<double *> &vectorWithMatrixes)
+{
+    for(auto iterate = vectorWithMatrixes.begin(); iterate != vectorWithMatrixes.end(); iterate++){
+        _CalcModule.initiateMatrix(*iterate, sizeof(*iterate)/sizeof(*iterate[0]));
+    }
 };

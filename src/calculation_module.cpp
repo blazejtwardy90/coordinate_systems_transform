@@ -218,6 +218,13 @@ void calculation_module::rad2hour(double inputRad, double *returnValue)
 		returnValue[i] = work[i];
 }
 
+void calculation_module::initiateMatrix(double *inputMatrix, const int matrixSize)
+{
+	for(int index = 0; index < matrixSize; index++){
+		inputMatrix[index] = 0;
+	}
+}
+
 bool calculation_module::verifyInputPlaneAngle(double &inputangle)
 {
 	if (inputangle < 0 || inputangle > 2 * M_PI)
