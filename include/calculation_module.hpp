@@ -1,4 +1,9 @@
 #pragma once
+
+constexpr int X_AXIS = 1;
+constexpr int Y_AXIS = 2;
+constexpr int Z_AXIS = 3;
+
 class calculation_module
 {
 private:

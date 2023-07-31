@@ -18,7 +18,7 @@ public:
     bool Init();
     virtual bool ToEquatorialRA();
     virtual bool ToEquatorialHA() {return false;};
-    virtual bool ToHorizontal(std::vector<double> inputArg) {return true;};
+    virtual bool ToHorizontal(std::vector<double> inputArg);
     virtual bool ToEcliptic() {return true;};
     virtual bool ToGalactic() {return true;};
 };

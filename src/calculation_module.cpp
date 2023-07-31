@@ -172,8 +172,10 @@ void calculation_module::rad2degree(double inputRad, double *returnValue)
 		work[0] = work[0] + 1;
 	}
 
-	for (int index = 0; index <= 2; index++)
+	for (int index = 0; index <= 2; index++){
+
 		returnValue[index] = work[index];
+	}
 }
 
 void calculation_module::rad2hour(double inputRad, double *returnValue)

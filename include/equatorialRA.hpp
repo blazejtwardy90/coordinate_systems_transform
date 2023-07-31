@@ -2,10 +2,6 @@
 #include "coordinate_system.hpp"
 #include "calculation_module.hpp"
 
-constexpr int X_AXIS = 1;
-constexpr int Y_AXIS = 2;
-constexpr int Z_AXIS = 3;
-
 class EquatorialRA :public coordinate_system
 {
 private:

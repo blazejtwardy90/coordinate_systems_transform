@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "iostream"
 
 class coordinate_system
 {
