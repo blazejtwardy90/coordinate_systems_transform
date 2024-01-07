@@ -5,6 +5,14 @@
 #include "equatorialRA.hpp"
 #include "equatorialHA.hpp"
 
+enum ECoordinateSystem{
+    eEquatorialRA = 1,
+    eEquatorialHA,
+    eHorizontal,
+    eEcliptic,
+    eGalactic
+};
+
 int main()
 {
     int startingSystem = 0; 
@@ -21,15 +29,16 @@ int main()
         correctInput = true;
         printf("Enter starting system: 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horizontal 4=Ecliptic 5=Galactic\n");
 		scanf("%d", &startingSystem);
-        switch (startingSystem)
+        const ECoordinateSystem eStartingSystem = static_cast<ECoordinateSystem>(startingSystem);
+        switch (eStartingSystem)
         {
-            case 1:
+            case ECoordinateSystem::eEquatorialRA:
             {
                 spCoordinateSystem = std::make_shared<EquatorialRA>();
                 correctInput = spCoordinateSystem->Init();
                 break;
             }
-            case 2:
+            case ECoordinateSystem::eEquatorialHA:
             {
                 spCoordinateSystem = std::make_shared<EquatorialHA>();
                 correctInput = spCoordinateSystem->Init();
@@ -51,9 +60,11 @@ int main()
 
         printf("Enter ending system: 1=Equatorial Right Ascension 2=Equatorial Hour Angle 3=Horizontal 4=Ecliptic 5=Galactic\n");
 		scanf("%d", &endSystem);
-        switch (endSystem)
+        const ECoordinateSystem eEndSystem = static_cast<ECoordinateSystem>(endSystem);
+       
+        switch (eEndSystem)
         {
-            case 1:
+            case ECoordinateSystem::eEquatorialRA:
                 {
                     if (spCoordinateSystem->ToEquatorialRA())
                     {
@@ -65,7 +76,7 @@ int main()
                     }
                     break;
                 }
-            case 2:
+            case ECoordinateSystem::eEquatorialHA:
                 {
                     if (spCoordinateSystem->ToEquatorialHA())
                     {
@@ -77,7 +88,7 @@ int main()
                     }
                     break;
                 }
-            case 3:
+            case ECoordinateSystem::eHorizontal:
                 {
                     std::vector<double> inputVector;
                     if (spCoordinateSystem->ToHorizontal(inputVector))
@@ -90,7 +101,7 @@ int main()
                     }
                     break;
                 }
-            case 4:
+            case ECoordinateSystem::eEcliptic:
                 {
                     if (spCoordinateSystem->ToEcliptic())
                     {
@@ -102,7 +113,7 @@ int main()
                     }
                     break;
                 }
-            case 5:
+            case ECoordinateSystem::eGalactic:
                 {
                     if (spCoordinateSystem->ToGalactic())
                     {
